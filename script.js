@@ -20,10 +20,10 @@ for (let i = 0; i<boxes; i++){
 	let box = document.createElement('div')
 	box.style.backgroundColor = boxColor[i]
 	box.className = boxPosition[i] 
-	let boxNum = Math.random()
+	// let boxNum = Math.random()
 	box.id = boxColor[i]
 	box.addEventListener('click', press)
-	boxNumber.push(boxNum)
+	// boxNumber.push(boxNum)
 	main.appendChild(box)
 
 }
@@ -31,29 +31,11 @@ for (let i = 0; i<boxes; i++){
 
 for(let i = 0; i <3; i++){
 	for(let k = 0; k<boxes; k++){
-		boxNumber.push(boxNumber[k])
+		boxNumber.push(Math.floor(Math.random()*boxes))
 	}
 }
 
-// taken from shuffle link
-function shuffle(boxNumber) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
 
-  // While there remain elements to shuffle...
-  while (0 !== currentIndex) {
-
-    // Pick a remaining element...
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-
-    // And swap it with the current element.
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}
 console.log(boxNumber)
 
 function press(){
@@ -70,7 +52,8 @@ let startButton = document.querySelector(".start")
 startButton.addEventListener("click", startGame)
 
 function startGame(){
-	let glowBox = document.querySelector(`#${boxNumber[turn]}`)
+	let selectBox = boxPosition[boxNumber[turn]]
+	let glowBox = document.querySelector(`.${selectBox}`)
 	glowBox.style.backgroundColor = "white"
 		turn ++
 }
