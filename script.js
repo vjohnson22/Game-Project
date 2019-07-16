@@ -9,8 +9,10 @@ let boxPosition =['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
 let main = document.querySelector('main')
 
 // boxes will eventually be connected to difficulty level
-let boxes = 8
+let boxes = 16
 
+//turn counter to control logic
+let turn = 0
 
 // box creator,
 
@@ -18,7 +20,8 @@ for (let i = 0; i<boxes; i++){
 	let box = document.createElement('div')
 	box.style.backgroundColor = boxColor[i]
 	box.className = boxPosition[i] 
-	boxNum = Math.random()
+	let boxNum = Math.random()
+	box.id = boxColor[i]
 	box.addEventListener('click', press)
 	boxNumber.push(boxNum)
 	main.appendChild(box)
@@ -61,5 +64,13 @@ function press(){
 
 //need to create functionality for easy(4), medium (8) hard(12), to change the number of boxes created
 
+//start button. in this iteration it will just test to see if the functionilty of cycling through different boxes works
 
-// create grid classes for each box position so when they get rendered, on easy the first 4 are in the middle, then then 8 on medium are the 2 middle columns, then the last one renders it all
+let startButton = document.querySelector(".start")
+startButton.addEventListener("click", startGame)
+
+function startGame(){
+	let glowBox = document.querySelector(`#${boxNumber[turn]}`)
+	glowBox.style.backgroundColor = "white"
+		turn ++
+}
