@@ -8,9 +8,13 @@ let boxPosition =['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
 
 let main = document.querySelector('main')
 
+// boxes will eventually be connected to difficulty level
+let boxes = 8
+
+
 // box creator,
 
-for (let i = 0; i<16; i++){
+for (let i = 0; i<boxes; i++){
 	let box = document.createElement('div')
 	box.style.backgroundColor = boxColor[i]
 	box.className = boxPosition[i] 
@@ -20,6 +24,34 @@ for (let i = 0; i<16; i++){
 	main.appendChild(box)
 
 }
+//pushed a bunch of iterations of the boxnumbers to the box number array to create the game click logic
+
+for(let i = 0; i <3; i++){
+	for(let k = 0; k<boxes; k++){
+		boxNumber.push(boxNumber[k])
+	}
+}
+
+// taken from shuffle link
+function shuffle(boxNumber) {
+  var currentIndex = array.length, temporaryValue, randomIndex;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+console.log(boxNumber)
 
 function press(){
 
