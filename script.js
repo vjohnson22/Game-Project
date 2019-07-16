@@ -4,18 +4,24 @@
 
 let boxNumber = []
 let boxColor = ["red", "green", "blue", "yellow", "orange","purple","teal", "cyan", "gray", "brown", "black","tan", "violet", "magenta", "turquoise", "pink"]
+let boxPosition =['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve','thirteen', 'fourteen', 'fifteen']
 
 let main = document.querySelector('main')
 
 // box creator,
 
-for (let i = 0; i<4; i++){
+for (let i = 0; i<16; i++){
 	let box = document.createElement('div')
-	box.backgroundColor = boxColor[i]
-	box.position = i 
+	box.style.backgroundColor = boxColor[i]
+	box.className = boxPosition[i] 
 	boxNum = Math.random()
+	box.addEventListener('click', press)
 	boxNumber.push(boxNum)
 	main.appendChild(box)
+
+}
+
+function press(){
 
 }
 
