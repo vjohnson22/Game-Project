@@ -12,7 +12,8 @@ let main = document.querySelector('main')
 let boxes 
 
 //turn counter to control logic
-let turn = 0
+let turn = 1
+let counter = 0 
 
 //function creates the boxes for the game based on the difficulty, which is decides how many boxes to create. the random order for the game is also created
 function initializeGame(){
@@ -22,6 +23,7 @@ function initializeGame(){
 		box.className = boxPosition[i] 
 		// let boxNum = Math.random()
 		box.id = boxColor[i]
+		box.blinks = 0
 		box.addEventListener('click', press)
 		// boxNumber.push(boxNum)
 		main.appendChild(box)
@@ -56,7 +58,7 @@ function press(){
 
 //added all of the buttons that control the iniatilizing of the game and the game difficulty
 let difficulty = document.querySelectorAll(".difficult")
-console.log(difficulty.length)
+
 
 let easyButton = difficulty[1]
 easyButton.addEventListener('click',easy)
@@ -71,7 +73,8 @@ function easy(){
 	boxes = 4
 	initializeGame()
 	hideDifficultyButtons()
-	let interval = setInterval(startGame,1000)
+	let interval = setInterval(changeColor, 500)
+	// startGame()
 }
 
 
@@ -102,7 +105,7 @@ let quitButton = inGameButtons[1]
 quitButton.addEventListener('click', reset)
 
 function reset(){
-	turn = 0
+	turn = 1
 	if(main.childElementCount > 0){
 		while (main.hasChildNodes()) {
 		    main.removeChild(main.lastChild)   
@@ -115,7 +118,7 @@ function reset(){
 //function hids all the items of class difficult so that only in game buttons show up.
 
 let chooseDiff = document.querySelector('.chooseDiff')
-console.log(chooseDiff)
+
 
 function hideDifficultyButtons(){
 	chooseDiff.style.display = "none"
@@ -143,30 +146,42 @@ function restoreButtons(){
 
 //Start game function begins game. start game looks in the box number array, which has the randomized order, grabs the number at the index that corresponds with the turn, and uses that to select which box, based on that index in the box position array
 
-function startGame(){
-	for(let i =0; i <= turn; i ++){
-	let selectBox = boxPosition[boxNumber[i]]
-	let glowBox = document.querySelector(`.${selectBox}`)
-	console.log(glowBox)
-	glowBox.setAttribute.blinkCounter = 0
-	let blink = setInterval(changeColor(glowBox),50)	
-		// turn ++
-	}
-}
+function changeColor(){
 
-//checks to see if the box color is white, if it isn't turns it white. if it is , turns it back to id color. timer above should make it blink
-function changeColor(glowBox){
-	if (glowBox.blinkCounter < 2){
-		if (glowBox.style.backgroundColor != "white"){
+	//gets uses the turn or counter number to find the "boxnumber", which is the randomized index number. it then finds what box is at that position
+
+
+	let selectBox = boxPosition[boxNumber[Math.floor(counter)]]
+	let glowBox = document.querySelector(`.${selectBox}`)
+	if (glowBox.style.backgroundColor != "white"){
 			glowBox.style.backgroundColor = "white"
-			glowBox.blinkCounter = glowBox.blinkCounter + 1
-			console.log(glowBox.counter)	
+			// glowBox.blinks ++
+			console.log(glowBox.style.backgroundColor)
+			console.log(glowBox.blinks)	
 		}else{
 			glowBox.style.backgroundColor = `${glowBox.id}`
-			glowBox.blinkCounter = glowBox.blinkCounter + 1
-			console.log(glowBox.counter)
-		}
-	
+// 			glowBox.blinks ++
+// 			console.log(glowBox.style.backgroundColor)
+// 			console.log(glowBox.blinks)	
 	}
-	
+	counter += .5
 }
+// }
+
+//checks to see if the box color is white, if it isn't turns it white. if it is , turns it back to id color. timer above should make it blink
+// function changeColor(glowBox){
+// 	// if (glowBox.blinks < 2){
+// 		if (glowBox.style.backgroundColor != "white"){
+// 			glowBox.style.backgroundColor = "white"
+// 			glowBox.blinks ++
+// 			console.log(glowBox.style.backgroundColor)
+// 			console.log(glowBox.blinks)	
+// 		}else{
+// 			glowBox.style.backgroundColor = `${glowBox.id}`
+// 			glowBox.blinks ++
+// 			console.log(glowBox.style.backgroundColor)
+// 			console.log(glowBox.blinks)
+// 		}
+	
+// 	}
+	
