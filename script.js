@@ -61,6 +61,7 @@ function startGame(){
 
 //added all of the buttons that control the iniatilizing of the game and the game difficulty
 let difficulty = document.querySelectorAll(".difficult")
+console.log(difficulty.length)
 
 let easyButton = difficulty[1]
 easyButton.addEventListener('click',easy)
@@ -74,21 +75,23 @@ impossibleButton.addEventListener('click',impossible)
 function easy(){
 	boxes = 4
 	initializeGame()
-	
+	hideDifficultyButtons()
 }
 
 
 function medium(){
 	boxes = 8
 	initializeGame()
+	hideDifficultyButtons()
 	
 }
 
 function impossible(){
 	boxes = 16
 	initializeGame()
-	
+	hideDifficultyButtons()	
 }
+
 
 
 // logic for quit button. deletes all the boxes and sets the turns back to zero
@@ -98,15 +101,31 @@ let inGameButtons = document.querySelectorAll(".inGame")
 
 
 let quitButton = inGameButtons[1]
-console.log(quitButton)
+
 
 quitButton.addEventListener('click', reset)
 
 function reset(){
-	if (main.childNodes.length != 0){
-		while(main.childNodes.length > 0){
-			main.removeChild[main.childNodes[0]]
-		}
+	if(main.childElementCount > 0){
+		while (main.hasChildNodes()) {
+		    main.removeChild(main.lastChild)   
 
+		}
+	}
+}
+
+//function hids all the items of class difficult so that only in game buttons show up.
+
+let chooseDiff = document.querySelector('.chooseDiff')
+console.log(chooseDiff)
+
+function hideDifficultyButtons(){
+	chooseDiff.style.display = "none"
+	for(let j = 1; j < difficulty.length	; j++){
+		difficulty[j].style.visibility = "hidden"
+		
+	}
+	for(let k = 0; k <inGameButtons.length; k ++){
+		inGameButtons[k].style.visibility = "visible"
 	}
 }

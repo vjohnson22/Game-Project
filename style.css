@@ -41,6 +41,9 @@ footer {
 	grid-column: 2 / span 1;
 	grid-row: 3;
 	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
 }
 
 .zero{
@@ -110,4 +113,8 @@ footer {
 .fifteen{
 	grid-row: 4 / span 1;
 	grid-column: 4/ span 1;
+}
+
+.inGame {
+	visibility: hidden;
 }
