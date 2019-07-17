@@ -9,34 +9,35 @@ let boxPosition =['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven',
 let main = document.querySelector('main')
 
 // boxes will eventually be connected to difficulty level
-let boxes = 16
+let boxes 
 
 //turn counter to control logic
 let turn = 0
 
-// box creator,
+//function creates the boxes for the game based on the difficulty, which is decides how many boxes to create. the random order for the game is also created
+function initializeGame(){
+	for (let i = 0; i<boxes; i++){
+		let box = document.createElement('div')
+		box.style.backgroundColor = boxColor[i]
+		box.className = boxPosition[i] 
+		// let boxNum = Math.random()
+		box.id = boxColor[i]
+		box.addEventListener('click', press)
+		// boxNumber.push(boxNum)
+		main.appendChild(box)
 
-for (let i = 0; i<boxes; i++){
-	let box = document.createElement('div')
-	box.style.backgroundColor = boxColor[i]
-	box.className = boxPosition[i] 
-	// let boxNum = Math.random()
-	box.id = boxColor[i]
-	box.addEventListener('click', press)
-	// boxNumber.push(boxNum)
-	main.appendChild(box)
+	}
 
-}
 //pushed a bunch of iterations of the boxnumbers to the box number array to create the game click logic
 
-for(let i = 0; i <3; i++){
-	for(let k = 0; k<boxes; k++){
-		boxNumber.push(Math.floor(Math.random()*boxes))
+	for(let i = 0; i <20; i++){
+		for(let k = 0; k<boxes; k++){
+			boxNumber.push(Math.floor(Math.random()*boxes))
+		}
 	}
 }
 
 
-console.log(boxNumber)
 
 function press(){
 
@@ -56,4 +57,56 @@ function startGame(){
 	let glowBox = document.querySelector(`.${selectBox}`)
 	glowBox.style.backgroundColor = "white"
 		turn ++
+}
+
+//added all of the buttons that control the iniatilizing of the game and the game difficulty
+let difficulty = document.querySelectorAll(".difficult")
+
+let easyButton = difficulty[1]
+easyButton.addEventListener('click',easy)
+
+let mediumButton = difficulty[2]
+mediumButton.addEventListener('click',medium)
+
+let impossibleButton = difficulty[3]
+impossibleButton.addEventListener('click',impossible)
+
+function easy(){
+	boxes = 4
+	initializeGame()
+	
+}
+
+
+function medium(){
+	boxes = 8
+	initializeGame()
+	
+}
+
+function impossible(){
+	boxes = 16
+	initializeGame()
+	
+}
+
+
+// logic for quit button. deletes all the boxes and sets the turns back to zero
+
+let inGameButtons = document.querySelectorAll(".inGame")
+
+
+
+let quitButton = inGameButtons[1]
+console.log(quitButton)
+
+quitButton.addEventListener('click', reset)
+
+function reset(){
+	if (main.childNodes.length != 0){
+		while(main.childNodes.length > 0){
+			main.removeChild[main.childNodes[0]]
+		}
+
+	}
 }

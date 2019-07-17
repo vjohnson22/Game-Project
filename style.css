@@ -40,6 +40,7 @@ footer {
 	border: 4px solid gray;
 	grid-column: 2 / span 1;
 	grid-row: 3;
+	text-align: center;
 }
 
 .zero{
