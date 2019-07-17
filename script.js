@@ -12,9 +12,10 @@ let main = document.querySelector('main')
 let boxes 
 
 //turn counter to control logic
-let turn = 3
+let turn = 1	
 let counter = 0 
 let interval = null;
+let pressNum = 0
 
 //function creates the boxes for the game based on the difficulty, which is decides how many boxes to create. the random order for the game is also created
 function initializeGame(){
@@ -42,9 +43,7 @@ function initializeGame(){
 
 
 
-function press(){
 
-}
 
 //create a box creator fiucntion to be called on button press
 
@@ -83,6 +82,7 @@ function medium(){
 	boxes = 8
 	initializeGame()
 	hideDifficultyButtons()
+	interval = setInterval(changeColor, 500)
 	
 }
 
@@ -90,6 +90,7 @@ function impossible(){
 	boxes = 16
 	initializeGame()
 	hideDifficultyButtons()	
+	interval = setInterval(changeColor, 500)
 }
 
 
@@ -106,7 +107,7 @@ let quitButton = inGameButtons[1]
 quitButton.addEventListener('click', reset)
 
 function reset(){
-	turn = 1
+	
 	if(main.childElementCount > 0){
 		while (main.hasChildNodes()) {
 		    main.removeChild(main.lastChild)   
@@ -114,6 +115,11 @@ function reset(){
 		}
 	}
 	restoreButtons()
+	turn = 1	
+	counter = 0 
+	interval = null;
+	pressNum = 0
+
 }
 
 //function hids all the items of class difficult so that only in game buttons show up.
@@ -159,9 +165,7 @@ function changeColor(){
 	let glowBox = document.querySelector(`.${selectBox}`)
 	if (glowBox.style.backgroundColor != "white"){
 			glowBox.style.backgroundColor = "white"
-			// glowBox.blinks ++
-			console.log(glowBox.style.backgroundColor)
-			console.log(glowBox.blinks)	
+			// glowBox.blinks ++	
 		}else{
 			glowBox.style.backgroundColor = `${glowBox.id}`
 // 			glowBox.blinks ++
@@ -171,22 +175,28 @@ function changeColor(){
 	counter += .5
 	
 }
-// }
+	
+// when player presses button, it needs to check that the position of that button is equal to the thing at the same index in the boxNumber array. then it updates the press until it equals to turn. if it does that successfully, it turns press back to  0, counter back to 0, and turn goes up by 1
+function press(){
+	let click = boxPosition.indexOf(this.className)
+	console.log(boxNumber[pressNum])
+	console.log(click)
+	console.log(pressNum)
 
-//checks to see if the box color is white, if it isn't turns it white. if it is , turns it back to id color. timer above should make it blink
-// function changeColor(glowBox){
-// 	// if (glowBox.blinks < 2){
-// 		if (glowBox.style.backgroundColor != "white"){
-// 			glowBox.style.backgroundColor = "white"
-// 			glowBox.blinks ++
-// 			console.log(glowBox.style.backgroundColor)
-// 			console.log(glowBox.blinks)	
-// 		}else{
-// 			glowBox.style.backgroundColor = `${glowBox.id}`
-// 			glowBox.blinks ++
-// 			console.log(glowBox.style.backgroundColor)
-// 			console.log(glowBox.blinks)
-// 		}
-	
-// 	}
-	
+	if (click === boxNumber[pressNum]){
+		pressNum++
+		if (pressNum === turn){
+			turn ++
+			pressNum = 0
+			counter = 0
+			interval = setInterval(changeColor, 500)
+		}
+
+	}else{
+		alert("Sorry, you have lost the game, try again!!")
+		reset()
+	}
+
+
+
+}
