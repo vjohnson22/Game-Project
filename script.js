@@ -49,15 +49,10 @@ function press(){
 
 //start button. in this iteration it will just test to see if the functionilty of cycling through different boxes works
 
-let startButton = document.querySelector(".start")
-startButton.addEventListener("click", startGame)
+// let startButton = document.querySelector(".start")
+// startButton.addEventListener("click", startGame)
 
-function startGame(){
-	let selectBox = boxPosition[boxNumber[turn]]
-	let glowBox = document.querySelector(`.${selectBox}`)
-	glowBox.style.backgroundColor = "white"
-		turn ++
-}
+
 
 //added all of the buttons that control the iniatilizing of the game and the game difficulty
 let difficulty = document.querySelectorAll(".difficult")
@@ -76,6 +71,7 @@ function easy(){
 	boxes = 4
 	initializeGame()
 	hideDifficultyButtons()
+	let interval = setInterval(startGame,1000)
 }
 
 
@@ -106,6 +102,7 @@ let quitButton = inGameButtons[1]
 quitButton.addEventListener('click', reset)
 
 function reset(){
+	turn = 0
 	if(main.childElementCount > 0){
 		while (main.hasChildNodes()) {
 		    main.removeChild(main.lastChild)   
@@ -140,4 +137,36 @@ function restoreButtons(){
 	for(let k = 0; k <inGameButtons.length; k ++){
 		inGameButtons[k].style.visibility = "hidden"
 	}
+}
+
+
+
+//Start game function begins game. start game looks in the box number array, which has the randomized order, grabs the number at the index that corresponds with the turn, and uses that to select which box, based on that index in the box position array
+
+function startGame(){
+	for(let i =0; i <= turn; i ++){
+	let selectBox = boxPosition[boxNumber[i]]
+	let glowBox = document.querySelector(`.${selectBox}`)
+	console.log(glowBox)
+	glowBox.setAttribute.blinkCounter = 0
+	let blink = setInterval(changeColor(glowBox),50)	
+		// turn ++
+	}
+}
+
+//checks to see if the box color is white, if it isn't turns it white. if it is , turns it back to id color. timer above should make it blink
+function changeColor(glowBox){
+	if (glowBox.blinkCounter < 2){
+		if (glowBox.style.backgroundColor != "white"){
+			glowBox.style.backgroundColor = "white"
+			glowBox.blinkCounter = glowBox.blinkCounter + 1
+			console.log(glowBox.counter)	
+		}else{
+			glowBox.style.backgroundColor = `${glowBox.id}`
+			glowBox.blinkCounter = glowBox.blinkCounter + 1
+			console.log(glowBox.counter)
+		}
+	
+	}
+	
 }
