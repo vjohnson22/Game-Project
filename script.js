@@ -112,6 +112,7 @@ function reset(){
 
 		}
 	}
+	restoreButtons()
 }
 
 //function hids all the items of class difficult so that only in game buttons show up.
@@ -127,5 +128,16 @@ function hideDifficultyButtons(){
 	}
 	for(let k = 0; k <inGameButtons.length; k ++){
 		inGameButtons[k].style.visibility = "visible"
+	}
+}
+//Brings buttons bacxk after a reset
+function restoreButtons(){
+	chooseDiff.style.display = ""
+	for(let j = 1; j < difficulty.length	; j++){
+		difficulty[j].style.visibility = "visible"
+		
+	}
+	for(let k = 0; k <inGameButtons.length; k ++){
+		inGameButtons[k].style.visibility = "hidden"
 	}
 }
