@@ -12,8 +12,9 @@ let main = document.querySelector('main')
 let boxes 
 
 //turn counter to control logic
-let turn = 1
+let turn = 3
 let counter = 0 
+let interval = null;
 
 //function creates the boxes for the game based on the difficulty, which is decides how many boxes to create. the random order for the game is also created
 function initializeGame(){
@@ -73,8 +74,8 @@ function easy(){
 	boxes = 4
 	initializeGame()
 	hideDifficultyButtons()
-	let interval = setInterval(changeColor, 500)
-	// startGame()
+	// let interval = setInterval(changeColor, 500)
+	interval = setInterval(changeColor, 500)
 }
 
 
@@ -146,10 +147,13 @@ function restoreButtons(){
 
 //Start game function begins game. start game looks in the box number array, which has the randomized order, grabs the number at the index that corresponds with the turn, and uses that to select which box, based on that index in the box position array
 
+
 function changeColor(){
 
 	//gets uses the turn or counter number to find the "boxnumber", which is the randomized index number. it then finds what box is at that position
-
+	if(counter === turn){
+		 return clearInterval(interval)
+	}
 
 	let selectBox = boxPosition[boxNumber[Math.floor(counter)]]
 	let glowBox = document.querySelector(`.${selectBox}`)
@@ -165,6 +169,7 @@ function changeColor(){
 // 			console.log(glowBox.blinks)	
 	}
 	counter += .5
+	
 }
 // }
 
