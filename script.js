@@ -250,12 +250,14 @@ function addHighScore(){
 		
 		let spot 
 		for(let j = 0; j < turn; j++){
-			if(score > scoreArray[j]){
-				spot = j
+			if (score === scoreArray[j]) {
+				break
+			}else if(score > scoreArray[j]){
+				scoreArray.splice(j,0,score)
 				break
 			}
 		}
-		scoreArray.splice(spot,0,score)
+		
 
 	}
 
