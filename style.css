@@ -5,12 +5,13 @@ body {
 	grid-template-rows: 1fr 7fr 1fr;
 	grid-template-columns: 1fr 4fr 1fr;
 }
-body * {
+/*body * {
 	border: 4px solid pink;
-}
+}*/
 header {
 	border: 4px solid green;
 	grid-column: 2 / span 1;
+	text-align: center;
 
 }
 .left {
@@ -117,4 +118,8 @@ footer {
 
 .inGame {
 	visibility: hidden;
+}
+.score {
+	display: inline;
+
 }

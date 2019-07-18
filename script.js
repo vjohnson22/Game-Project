@@ -16,7 +16,9 @@ let turn = 1
 let counter = 0 
 let interval = null;
 let pressNum = 0
-
+let speed 
+let score = 0
+let increment 
 //function creates the boxes for the game based on the difficulty, which is decides how many boxes to create. the random order for the game is also created
 function initializeGame(){
 	for (let i = 0; i<boxes; i++){
@@ -74,7 +76,9 @@ function easy(){
 	initializeGame()
 	hideDifficultyButtons()
 	// let interval = setInterval(changeColor, 500)
-	interval = setInterval(changeColor, 500)
+	increment = 100
+	speed = 500
+	interval = setInterval(changeColor, speed)
 }
 
 
@@ -82,7 +86,9 @@ function medium(){
 	boxes = 8
 	initializeGame()
 	hideDifficultyButtons()
-	interval = setInterval(changeColor, 500)
+	increment = 250
+	speed = 300
+	interval = setInterval(changeColor, speed)
 	
 }
 
@@ -90,7 +96,9 @@ function impossible(){
 	boxes = 16
 	initializeGame()
 	hideDifficultyButtons()	
-	interval = setInterval(changeColor, 500)
+	speed = 100
+	increment = 500
+	interval = setInterval(changeColor, speed)
 }
 
 
@@ -102,6 +110,9 @@ let inGameButtons = document.querySelectorAll(".inGame")
 
 
 let quitButton = inGameButtons[1]
+
+
+let scoreUpdate = document.querySelector("#points")
 
 
 quitButton.addEventListener('click', reset)
@@ -120,6 +131,8 @@ function reset(){
 	clearInterval(interval)
 	pressNum = 0
 	boxNumber = []
+	score = 0
+	scoreUpdate.innerText = '0000'
 
 }
 
@@ -178,11 +191,10 @@ function changeColor(){
 }
 	
 // when player presses button, it needs to check that the position of that button is equal to the thing at the same index in the boxNumber array. then it updates the press until it equals to turn. if it does that successfully, it turns press back to  0, counter back to 0, and turn goes up by 1
+
+
 function press(){
 	let click = boxPosition.indexOf(this.className)
-	console.log(boxNumber[pressNum])
-	console.log(click)
-	console.log(pressNum)
 
 	if (click === boxNumber[pressNum]){
 		pressNum++
@@ -190,7 +202,10 @@ function press(){
 			turn ++
 			pressNum = 0
 			counter = 0
-			interval = setInterval(changeColor, 500)
+			score += increment
+			scoreUpdate.innerText = score
+			interval = setInterval(changeColor, speed)
+			console.log(speed)
 		}
 
 	}else{
