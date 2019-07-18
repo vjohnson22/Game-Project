@@ -117,8 +117,9 @@ function reset(){
 	restoreButtons()
 	turn = 1	
 	counter = 0 
-	interval = null;
+	clearInterval(interval)
 	pressNum = 0
+	boxNumber = []
 
 }
 
