@@ -75,7 +75,6 @@ function easy(){
 	boxes = 4
 	initializeGame()
 	hideDifficultyButtons()
-	// let interval = setInterval(changeColor, 500)
 	increment = 100
 	speed = 500
 	interval = setInterval(changeColor, speed)
@@ -236,19 +235,23 @@ let scoreArray = []
 
 //to adds the score to the scoreboard and re-sorts each time
 function addHighScore(){
-		if(scoreBoard.childElementCount > 0){
-			while (scoreBoard.hasChildNodes()) {
+		
+	if(scoreBoard.childElementCount > 0){
+			while (scoreBoard.childElementCount > 0) {
 			    scoreBoard.removeChild(scoreBoard.lastChild)   
 
 			}
 		}
-		
-		
+		console.log(scoreBoard)
+
 		scoreArray.push(score)
 
-		scoreArray.sort()
+		scoreArray = scoreArray.sort()
+
+		console.log(scoreArray)
 		
-		for(let i = 0; i < scoreArray.length; i++){
+		
+		for(let i = scoreArray.length-1; i >= 0 ; i--){
 			let li = document.createElement('li')
 			li.innerText = scoreArray[i]
 			scoreBoard.appendChild(li)
