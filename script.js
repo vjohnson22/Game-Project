@@ -192,6 +192,7 @@ function changeColor(){
 	
 // when player presses button, it needs to check that the position of that button is equal to the thing at the same index in the boxNumber array. then it updates the press until it equals to turn. if it does that successfully, it turns press back to  0, counter back to 0, and turn goes up by 1
 
+let scoreBoard = document.querySelector('.high') 
 
 function press(){
 	let click = boxPosition.indexOf(this.className)
@@ -209,10 +210,34 @@ function press(){
 		}
 
 	}else{
-		alert("Sorry, you have lost the game, try again!!")
+		if (score > 1000) {
+			
+			addHighScore()			
+			alert(`Congratulations, you scored ${score} points!`)
+			reset()
+			
+
+
+
+		}else{
+		
+		addHighScore()
 		reset()
+		alert("Sorry, you have lost the game, try again!!")
+		
+		}
+		
 	}
 
 
 
+}
+
+function addHighScore(){
+	let li = document.createElement('li')
+	li.innerText = score
+	scoreBoard.appendChild(li)
+	let list = document.querySelectorAll('li')
+	// list.sort()
+	console.log(list)
 }
