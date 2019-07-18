@@ -205,7 +205,7 @@ function press(){
 			score += increment
 			scoreUpdate.innerText = score
 			interval = setInterval(changeColor, speed)
-			console.log(speed)
+			
 		}
 
 	}else{
@@ -263,7 +263,7 @@ function addHighScore(){
 
 		// scoreArray = scoreArray.sort()
 
-		console.log(scoreArray)
+		
 		
 		
 		for(let i = 0; i < scoreArray.length;i++){

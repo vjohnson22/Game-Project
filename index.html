@@ -5,25 +5,26 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body>
+<body class ="body">
 	<header>
 		<h1>Simon</h1>
 		<h2 class= "score">Score:</h2> <h2 class= "score" id = "points">0000</h2>
 	</header>
-	<aside class = "left">
-		<h2>Left</h2>
+	<aside class = "left gone">
+		<h2>Instructions</h2>
+		<p>Simon is a memory game. Score by clicking the buttons in the same order as the computer. Each time you are successful, another button will be added to the sequence. Try to set a high score!</p>
 	</aside>
 
-	<main>
+	<main class = "full-screen tall">
 	</main>
-	<aside class="right">
+	<aside class="right gone">
 		<h2>Session High Scores</h2>
 		<ul class = "high">
 			<!-- <li>test</li> -->
 		</ul>
 		
 	</aside>
-	<footer>
+	<footer class = "full-screen foot">
 		<h2 class="difficult chooseDiff">Choose Your Difficulty Level</h2>
 		<div class = "buttons">
 			<button class = "difficult">Easy</button>
