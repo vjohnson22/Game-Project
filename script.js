@@ -242,16 +242,29 @@ function addHighScore(){
 
 			}
 		}
-		console.log(scoreBoard)
 
+	
+	if(scoreArray.length === 0){
 		scoreArray.push(score)
+	}else{
+		
+		let spot 
+		for(let j = 0; j < turn; j++){
+			if(score > scoreArray[j]){
+				spot = j
+				break
+			}
+		}
+		scoreArray.splice(spot,0,score)
 
-		scoreArray = scoreArray.sort()
+	}
+
+		// scoreArray = scoreArray.sort()
 
 		console.log(scoreArray)
 		
 		
-		for(let i = scoreArray.length-1; i >= 0 ; i--){
+		for(let i = 0; i < scoreArray.length;i++){
 			let li = document.createElement('li')
 			li.innerText = scoreArray[i]
 			scoreBoard.appendChild(li)
