@@ -232,12 +232,27 @@ function press(){
 
 
 }
+let scoreArray = []
 
+//to adds the score to the scoreboard and re-sorts each time
 function addHighScore(){
-	let li = document.createElement('li')
-	li.innerText = score
-	scoreBoard.appendChild(li)
-	let list = document.querySelectorAll('li')
-	// list.sort()
-	console.log(list)
-}
+		if(scoreBoard.childElementCount > 0){
+			while (scoreBoard.hasChildNodes()) {
+			    scoreBoard.removeChild(scoreBoard.lastChild)   
+
+			}
+		}
+		
+		
+		scoreArray.push(score)
+
+		scoreArray.sort()
+		
+		for(let i = 0; i < scoreArray.length; i++){
+			let li = document.createElement('li')
+			li.innerText = scoreArray[i]
+			scoreBoard.appendChild(li)
+		}
+	}
+// 	}
+// }
